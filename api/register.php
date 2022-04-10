@@ -10,11 +10,29 @@
     $tmp_name = $_FILES['image']['tmp_name'];
     $role = $_POST['role'];
 
+
+
+    //query to check duplicate mobile no registration
+
+    $check_duplicate_mobile = "SELECT mobile FROM user WHERE mobile = '$mobile' ";
+    $result = mysqli_query($connect, $check_duplicate_mobile);
+    $count= mysqli_num_rows($result);
+
+    if($count>0){
+        echo '<script>
+                alert("Mobile Number already exists. Please login");
+                window.location = "../";
+            </script>';
+            return false;
+
+    }
+
     if($cpass!=$pass){
         echo '<script>
                 alert("Passwords do not match!");
                 window.location = "../routes/register.php";
             </script>';
+            
     }
     else{
         move_uploaded_file($tmp_name,"../uploads/$image");

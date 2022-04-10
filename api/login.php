@@ -19,9 +19,16 @@
         $_SESSION['id'] = $data['id'];
         $_SESSION['status'] = $data['status'];
         $_SESSION['data'] = $data;
+        if($role ==1 || $role==2){
         echo '<script>
                 window.location = "../routes/dashboard.php";
             </script>';
+        }
+        else{
+            echo '<script>
+                window.location = "../routes/admindashboard.php";
+            </script>';
+        }
     }
     else{
         echo '<script>
